@@ -8,4 +8,6 @@ import (
 func setupRoutes(app *fiber.App) {
 	app.Get("/", handlers.GetSegm)
 	app.Post("/segm", handlers.CreateSegment)
+	app.Get("/show_user", handlers.GetUser)
+	app.Post("/user", handlers.CreateUser)
 }

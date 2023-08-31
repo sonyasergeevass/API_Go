@@ -34,7 +34,16 @@ func ConnectDb() {
 	db.Logger = logger.Default.LogMode(logger.Info)
 
 	log.Println("running migrations")
-	db.AutoMigrate(&models.Segment{})
+	if err := db.AutoMigrate(&models.Segment{}); err != nil {
+		log.Fatal(err)
+	}
+	if err := db.AutoMigrate(&models.User{}); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := db.AutoMigrate(&models.UserSegment{}); err != nil {
+		log.Fatal(err)
+	}
 
 	DB = Dbinstance{
 		Db: db,

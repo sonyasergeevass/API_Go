@@ -9,5 +9,11 @@ type Segment struct {
 
 type User struct {
 	gorm.Model
-	UserId int64 `json:"user_id" gorm:"; not null;"`
+	UserId int64 `json:"user_id" gorm:"; not null; default: null"`
+}
+
+type UserSegment struct {
+	gorm.Model
+	UserId      int64  `gorm:"not null"`
+	SegmentName string `gorm:"text; not null"`
 }

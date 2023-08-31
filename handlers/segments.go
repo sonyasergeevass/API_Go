@@ -28,3 +28,25 @@ func CreateSegment(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(segm)
 }
+
+func GetUser(c *fiber.Ctx) error {
+	user := []models.User{}
+	database.DB.Db.Find(&user)
+
+	return c.Status(200).JSON(user)
+}
+
+func CreateUser(c *fiber.Ctx) error {
+	user := new(models.User)
+	body := c.Body()
+	err := json.Unmarshal(body, user)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+
+	database.DB.Db.Create(&user)
+
+	return c.Status(200).JSON(user)
+}
